@@ -14,13 +14,10 @@
       --amber: #d4943a;
       --parchment: #e8d5b0;
       --muted: #9a8a75;
-      --green: #3a5c2a;
       --burgundy: #7a2235;
       --border: #2e2620;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       background-color: var(--bg);
       color: var(--parchment);
@@ -28,26 +25,12 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-
-    /* Noise texture overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1000;
-      opacity: 0.6;
-    }
-
-    /* ── HEADER ── */
     header {
       text-align: center;
       padding: 60px 20px 40px;
       position: relative;
       border-bottom: 1px solid var(--border);
     }
-
     header::before {
       content: '';
       position: absolute;
@@ -55,16 +38,7 @@
       height: 3px;
       background: linear-gradient(90deg, transparent, var(--rust), var(--amber), var(--rust), transparent);
     }
-
-    .brand-eyebrow {
-      font-family: 'Crimson Text', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
+    .brand-eyebrow { font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
     .brand-name {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(2.2rem, 7vw, 4.5rem);
@@ -73,449 +47,289 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: 0.05em;
-      line-height: 1.1;
-      text-shadow: none;
       animation: shimmer 4s ease-in-out infinite;
       background-size: 200% auto;
     }
+    @keyframes shimmer { 0%,100%{background-position:0% center} 50%{background-position:100% center} }
+    .brand-tagline { font-family: 'IM Fell English', serif; font-style: italic; font-size: 1rem; color: var(--muted); margin-top: 12px; letter-spacing: 0.1em; }
+    .divider { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 24px auto; max-width: 300px; }
+    .divider::before { content:''; flex:1; height:1px; background: linear-gradient(90deg,transparent,var(--rust)); }
+    .divider::after { content:''; flex:1; height:1px; background: linear-gradient(90deg,var(--rust),transparent); }
+    .divider-gem { color: var(--rust); font-size: 1.2rem; }
+    .announce { background: linear-gradient(90deg,var(--burgundy),#3d1020,var(--burgundy)); text-align: center; padding: 10px 20px; font-size: 0.85rem; letter-spacing: 0.15em; color: var(--parchment); border-top: 1px solid #5a1830; border-bottom: 1px solid #5a1830; }
+    .collection { padding: 50px 20px 80px; max-width: 1100px; margin: 0 auto; }
+    .section-label { text-align: center; margin-bottom: 40px; }
+    .section-label h2 { font-family: 'Cinzel Decorative', serif; font-size: clamp(1rem,3vw,1.4rem); font-weight: 400; color: var(--amber); letter-spacing: 0.2em; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(290px,1fr)); gap: 24px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; animation: fadeUp .6s ease both; }
+    .card:hover { transform: translateY(-6px) rotate(0.3deg); box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 0 1px var(--rust); border-color: var(--rust); }
+    .card:nth-child(1){animation-delay:.05s} .card:nth-child(2){animation-delay:.12s} .card:nth-child(3){animation-delay:.19s} .card:nth-child(4){animation-delay:.26s} .card:nth-child(5){animation-delay:.33s} .card:nth-child(6){animation-delay:.40s}
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .card-img-wrap { position: relative; overflow: hidden; aspect-ratio: 3/4; background: #16120e; }
+    .card-img-wrap img { width:100%; height:100%; object-fit:cover; transition: transform .6s ease, filter .4s ease; filter: saturate(.85) contrast(1.05); }
+    .card:hover .card-img-wrap img { transform: scale(1.06); filter: saturate(1.1) contrast(1.08); }
+    .card-img-wrap::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg,transparent 55%,rgba(15,13,11,.85) 100%); pointer-events:none; }
+    .badge { position:absolute; top:14px; left:14px; background:var(--burgundy); color:var(--parchment); font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; padding:4px 10px; z-index:2; border:1px solid #a03050; }
+    .card-body { padding: 18px 20px 22px; border-top: 1px solid var(--border); }
+    .product-name { font-family: 'IM Fell English', serif; font-size: 1.15rem; color: var(--parchment); margin-bottom: 6px; }
+    .product-desc { font-size:.85rem; color:var(--muted); font-style:italic; margin-bottom:14px; line-height:1.5; }
+    .product-footer { display:flex; align-items:center; justify-content:space-between; }
+    .price { font-family:'Cinzel Decorative',serif; font-size:1.1rem; color:var(--amber); }
+    .order-btn { display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,var(--rust),var(--burgundy)); color:var(--parchment); font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; padding:8px 16px; border-radius:2px; border:1px solid transparent; cursor:pointer; transition:all .25s ease; font-family:'Crimson Text',serif; }
+    .order-btn:hover { background:transparent; border-color:var(--rust); color:var(--amber); }
+    footer { text-align:center; padding:40px 20px; border-top:1px solid var(--border); color:var(--muted); font-size:.85rem; }
+    footer a { color:var(--rust); text-decoration:none; }
+    .footer-brand { font-family:'Cinzel Decorative',serif; font-size:1rem; color:var(--amber); display:block; margin-bottom:8px; }
+    .float-cta { position:fixed; bottom:24px; right:24px; background:linear-gradient(135deg,#1d6a8c,#0d4f6e); color:white; border-radius:50px; padding:12px 20px; display:flex; align-items:center; gap:8px; font-size:.9rem; text-decoration:none; box-shadow:0 8px 30px rgba(0,0,0,.5); z-index:999; transition:transform .2s ease; font-family:'Crimson Text',serif; }
+    .float-cta:hover { transform:translateY(-3px); }
+    .float-cta svg { width:18px; height:18px; fill:white; }
 
-    @keyframes shimmer {
-      0%, 100% { background-position: 0% center; }
-      50% { background-position: 100% center; }
+    /* MODAL */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:2000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
+    .modal-overlay.active { display:flex; }
+    .modal { background:var(--card); border:1px solid var(--rust); border-radius:6px; width:100%; max-width:440px; max-height:90vh; overflow-y:auto; position:relative; box-shadow:0 30px 80px rgba(0,0,0,.8); animation:modalIn .3s ease; }
+    @keyframes modalIn { from{opacity:0;transform:scale(.95) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+    .modal-header { padding:24px 24px 16px; border-bottom:1px solid var(--border); position:relative; }
+    .modal-title { font-family:'Cinzel Decorative',serif; font-size:1.1rem; color:var(--amber); letter-spacing:.1em; }
+    .modal-subtitle { font-size:.85rem; color:var(--muted); font-style:italic; margin-top:4px; }
+    .modal-close { position:absolute; top:20px; right:20px; background:none; border:none; color:var(--muted); font-size:1.4rem; cursor:pointer; transition:color .2s; }
+    .modal-close:hover { color:var(--parchment); }
+    .modal-body { padding:24px; }
+    .form-group { margin-bottom:18px; }
+    .form-group label { display:block; font-size:.8rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+    .form-group input, .form-group select { width:100%; background:var(--surface); border:1px solid var(--border); border-radius:3px; padding:10px 14px; color:var(--parchment); font-family:'Crimson Text',serif; font-size:1rem; transition:border-color .2s; outline:none; appearance:none; }
+    .form-group input:focus, .form-group select:focus { border-color:var(--rust); }
+    .form-group select option { background:#1a1612; }
+    .submit-btn { width:100%; padding:14px; background:linear-gradient(135deg,var(--rust),var(--burgundy)); border:none; border-radius:3px; color:var(--parchment); font-family:'Cinzel Decorative',serif; font-size:.9rem; letter-spacing:.1em; cursor:pointer; transition:opacity .2s, transform .2s; margin-top:8px; }
+    .submit-btn:hover { opacity:.9; transform:translateY(-1px); }
+    .payment-screen { display:none; padding:24px; text-align:center; }
+    .payment-screen.active { display:block; }
+    .form-screen.hidden { display:none; }
+    .payment-title { font-family:'Cinzel Decorative',serif; color:var(--amber); font-size:1rem; margin-bottom:6px; letter-spacing:.1em; }
+    .payment-sub { color:var(--muted); font-size:.9rem; font-style:italic; margin-bottom:20px; }
+    .qr-wrap { background:white; border-radius:8px; padding:12px; display:inline-block; margin-bottom:20px; box-shadow:0 0 30px rgba(196,98,45,.3); }
+    .qr-wrap img { display:block; width:180px; height:180px; }
+    .amount-tag { display:inline-block; background:var(--burgundy); color:var(--parchment); padding:4px 16px; border-radius:20px; font-family:'Cinzel Decorative',serif; font-size:1rem; margin-bottom:20px; border:1px solid #a03050; }
+    .upi-box { background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:14px 18px; margin-bottom:20px; }
+    .upi-label { font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+    .upi-id { font-family:'Cinzel Decorative',serif; color:var(--amber); font-size:.95rem; }
+    .steps-list { text-align:left; background:var(--surface); border:1px solid var(--border); border-radius:4px; padding:16px 18px; margin-bottom:20px; }
+    .steps-list p { font-size:.9rem; color:var(--parchment); padding:5px 0; border-bottom:1px solid var(--border); display:flex; gap:10px; }
+    .steps-list p:last-child { border-bottom:none; }
+    .step-num { color:var(--rust); font-family:'Cinzel Decorative',serif; font-size:.8rem; min-width:20px; }
+    .tg-confirm-btn { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:13px; background:linear-gradient(135deg,#1d6a8c,#0d4f6e); border:none; border-radius:3px; color:white; font-family:'Crimson Text',serif; font-size:1rem; letter-spacing:.1em; cursor:pointer; text-decoration:none; transition:opacity .2s; }
+    .tg-confirm-btn:hover { opacity:.9; }
+    .tg-confirm-btn svg { width:18px; height:18px; fill:white; }
+    .order-summary { background:rgba(196,98,45,.1); border:1px solid rgba(196,98,45,.3); border-radius:4px; padding:10px 14px; margin-bottom:20px; font-size:.85rem; color:var(--parchment); text-align:left; }
+    .order-summary span { color:var(--amber); font-weight:600; }
+    @media(max-width:500px){
+      header{padding:40px 16px 30px}
+      .grid{grid-template-columns:1fr 1fr;gap:12px}
+      .card-body{padding:12px 14px 16px}
+      .product-name{font-size:.95rem}
+      .product-desc{display:none}
+      .price{font-size:.95rem}
+      .order-btn{font-size:.75rem;padding:6px 10px}
     }
-
-    .brand-tagline {
-      font-family: 'IM Fell English', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--muted);
-      margin-top: 12px;
-      letter-spacing: 0.1em;
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      justify-content: center;
-      margin: 24px auto;
-      max-width: 300px;
-    }
-    .divider::before, .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--rust));
-    }
-    .divider::after {
-      background: linear-gradient(90deg, var(--rust), transparent);
-    }
-    .divider-gem {
-      color: var(--rust);
-      font-size: 1.2rem;
-    }
-
-    /* ── ANNOUNCEMENT BAR ── */
-    .announce {
-      background: linear-gradient(90deg, var(--burgundy), #3d1020, var(--burgundy));
-      text-align: center;
-      padding: 10px 20px;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      color: var(--parchment);
-      border-top: 1px solid #5a1830;
-      border-bottom: 1px solid #5a1830;
-    }
-
-    /* ── COLLECTION SECTION ── */
-    .collection {
-      padding: 50px 20px 80px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .section-label h2 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1rem, 3vw, 1.4rem);
-      font-weight: 400;
-      color: var(--amber);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    /* ── PRODUCT GRID ── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 24px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      transform: translateY(-6px) rotate(0.3deg);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px var(--rust);
-      border-color: var(--rust);
-    }
-
-    .card-img-wrap {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 3/4;
-      background: #16120e;
-    }
-
-    .card-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease, filter 0.4s ease;
-      filter: saturate(0.85) contrast(1.05);
-    }
-
-    .card:hover .card-img-wrap img {
-      transform: scale(1.06);
-      filter: saturate(1.1) contrast(1.08);
-    }
-
-    /* Corner ornament */
-    .card-img-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 55%, rgba(15,13,11,0.85) 100%);
-      pointer-events: none;
-    }
-
-    .badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      background: var(--burgundy);
-      color: var(--parchment);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      font-family: 'Crimson Text', serif;
-      z-index: 2;
-      border: 1px solid #a03050;
-    }
-
-    .card-body {
-      padding: 18px 20px 22px;
-      border-top: 1px solid var(--border);
-    }
-
-    .product-name {
-      font-family: 'IM Fell English', serif;
-      font-size: 1.15rem;
-      color: var(--parchment);
-      margin-bottom: 6px;
-      line-height: 1.3;
-    }
-
-    .product-desc {
-      font-family: 'Crimson Text', serif;
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-style: italic;
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .product-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .price {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.1rem;
-      color: var(--amber);
-      letter-spacing: 0.05em;
-    }
-
-    .order-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: linear-gradient(135deg, var(--rust), var(--burgundy));
-      color: var(--parchment);
-      text-decoration: none;
-      font-family: 'Crimson Text', serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 8px 16px;
-      border-radius: 2px;
-      transition: all 0.25s ease;
-      border: 1px solid transparent;
-    }
-
-    .order-btn:hover {
-      background: transparent;
-      border-color: var(--rust);
-      color: var(--amber);
-    }
-
-    .order-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-family: 'Crimson Text', serif;
-    }
-
-    footer a {
-      color: var(--rust);
-      text-decoration: none;
-    }
-
-    footer .footer-brand {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1rem;
-      color: var(--amber);
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    /* ── FLOATING TELEGRAM CTA ── */
-    .float-cta {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: linear-gradient(135deg, #1d6a8c, #0d4f6e);
-      color: white;
-      border-radius: 50px;
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Crimson Text', serif;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
-      z-index: 999;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .float-cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.5);
-    }
-
-    .float-cta svg {
-      width: 18px;
-      height: 18px;
-      fill: white;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 500px) {
-      header { padding: 40px 16px 30px; }
-      .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .card-body { padding: 12px 14px 16px; }
-      .product-name { font-size: 0.95rem; }
-      .product-desc { display: none; }
-      .price { font-size: 0.95rem; }
-      .order-btn { font-size: 0.75rem; padding: 6px 10px; }
-    }
-
-    /* Entry animations */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
-      animation: fadeUp 0.6s ease both;
-    }
-    .card:nth-child(1) { animation-delay: 0.05s; }
-    .card:nth-child(2) { animation-delay: 0.12s; }
-    .card:nth-child(3) { animation-delay: 0.19s; }
-    .card:nth-child(4) { animation-delay: 0.26s; }
-    .card:nth-child(5) { animation-delay: 0.33s; }
-    .card:nth-child(6) { animation-delay: 0.40s; }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <p class="brand-eyebrow">✦ handpicked bohemian collective ✦</p>
-    <h1 class="brand-name">Shadow Loots</h1>
-    <p class="brand-tagline">rare finds for the wandering soul</p>
-    <div class="divider"><span class="divider-gem">✦</span></div>
-  </header>
+<header>
+  <p class="brand-eyebrow">✦ handpicked bohemian collective ✦</p>
+  <h1 class="brand-name">Shadow Loots</h1>
+  <p class="brand-tagline">rare finds for the wandering soul</p>
+  <div class="divider"><span class="divider-gem">✦</span></div>
+</header>
 
-  <!-- ANNOUNCE -->
-  <div class="announce">
-    ✦ &nbsp; All pieces ₹459 &nbsp;·&nbsp; DM on Telegram to order &nbsp;·&nbsp; Limited stock &nbsp; ✦
+<div class="announce">✦ &nbsp; All pieces ₹459 &nbsp;·&nbsp; Order below · Pay via GPay &nbsp;·&nbsp; Limited stock &nbsp; ✦</div>
+
+<section class="collection">
+  <div class="section-label"><h2>Current Collection</h2></div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-img-wrap"><span class="badge">In Stock</span><img src="dress1.jpg" alt="Mushroom Patchwork Hoodie" loading="lazy"/></div>
+      <div class="card-body">
+        <p class="product-name">Mushroom Patchwork Hoodie</p>
+        <p class="product-desc">Stone-washed patchwork · Boho print · Zip-up</p>
+        <div class="product-footer"><span class="price">₹459</span><button class="order-btn" onclick="openOrder('Mushroom Patchwork Hoodie')">Order Now</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><span class="badge">In Stock</span><img src="dress2.jpg" alt="Patchwork Cargo Pants" loading="lazy"/></div>
+      <div class="card-body">
+        <p class="product-name">Patchwork Cargo Pants</p>
+        <p class="product-desc">Acid-wash · Multi-patch · Elastic waist</p>
+        <div class="product-footer"><span class="price">₹459</span><button class="order-btn" onclick="openOrder('Patchwork Cargo Pants')">Order Now</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><span class="badge">In Stock</span><img src="dress3.jpg" alt="Celestial Patchwork Hoodie" loading="lazy"/></div>
+      <div class="card-body">
+        <p class="product-name">Celestial Patchwork Hoodie</p>
+        <p class="product-desc">Moon & star print · Fleece-lined · Deep burgundy</p>
+        <div class="product-footer"><span class="price">₹459</span><button class="order-btn" onclick="openOrder('Celestial Patchwork Hoodie')">Order Now</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><span class="badge">In Stock</span><img src="dress4.jpg" alt="Aztec Hooded Poncho" loading="lazy"/></div>
+      <div class="card-body">
+        <p class="product-name">Aztec Hooded Poncho</p>
+        <p class="product-desc">Tribal weave · Fringed hem · Earthy tones</p>
+        <div class="product-footer"><span class="price">₹459</span><button class="order-btn" onclick="openOrder('Aztec Hooded Poncho')">Order Now</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><span class="badge">In Stock</span><img src="dress5.jpg" alt="Teal Embroidered Shirt" loading="lazy"/></div>
+      <div class="card-body">
+        <p class="product-name">Teal Embroidered Shirt</p>
+        <p class="product-desc">Hand-embroidered · Linen blend · Oversized fit</p>
+        <div class="product-footer"><span class="price">₹459</span><button class="order-btn" onclick="openOrder('Teal Embroidered Shirt')">Order Now</button></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img-wrap"><span class="badge">In Stock</span><img src="dress6.jpg" alt="Rust Tribal Kimono" loading="lazy"/></div>
+      <div class="card-body">
+        <p class="product-name">Rust Tribal Kimono</p>
+        <p class="product-desc">Block-print border · Open drape · Rust cotton</p>
+        <div class="product-footer"><span class="price">₹459</span><button class="order-btn" onclick="openOrder('Rust Tribal Kimono')">Order Now</button></div>
+      </div>
+    </div>
+
   </div>
+</section>
 
-  <!-- COLLECTION -->
-  <section class="collection">
-    <div class="section-label">
-      <h2>Current Collection</h2>
+<footer>
+  <span class="footer-brand">Shadow Loots</span>
+  <p>Telegram: <a href="https://t.me/shadowlootz" target="_blank">@shadowlootz</a></p>
+  <p style="margin-top:8px;font-size:.75rem;opacity:.5;">✦ handpicked bohemian finds ✦</p>
+</footer>
+
+<a class="float-cta" href="https://t.me/shadowlootz" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+  @shadowlootz
+</a>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOnOverlay(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <p class="modal-title">Place Your Order</p>
+      <p class="modal-subtitle" id="modalItemName"></p>
+      <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
+    <div class="modal-body">
 
-    <div class="grid">
-
-      <!-- Card 1 -->
-      <div class="card">
-        <div class="card-img-wrap">
-          <span class="badge">In Stock</span>
-          <img src="dress1.jpg" alt="Patchwork Mushroom Hoodie" loading="lazy"/>
+      <!-- STEP 1: FORM -->
+      <div class="form-screen" id="formScreen">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="custName" placeholder="Enter your full name"/>
         </div>
-        <div class="card-body">
-          <p class="product-name">Mushroom Patchwork Hoodie</p>
-          <p class="product-desc">Stone-washed patchwork · Boho print · Zip-up</p>
-          <div class="product-footer">
-            <span class="price">₹459</span>
-            <a class="order-btn" href="https://t.me/shadowlootz" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-              Order
-            </a>
-          </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="custPhone" placeholder="10-digit mobile number" maxlength="10"/>
         </div>
+        <div class="form-group">
+          <label>Size</label>
+          <select id="custSize">
+            <option value="">Select size</option>
+            <option>XS</option><option>S</option><option>M</option>
+            <option>L</option><option>XL</option><option>XXL</option>
+            <option>Free Size</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Delivery Address</label>
+          <input type="text" id="custAddress" placeholder="Full address with pincode"/>
+        </div>
+        <button class="submit-btn" onclick="submitOrder()">Proceed to Pay ₹459 →</button>
       </div>
 
-      <!-- Card 2 -->
-      <div class="card">
-        <div class="card-img-wrap">
-          <span class="badge">In Stock</span>
-          <img src="dress2.jpg" alt="Patchwork Cargo Pants" loading="lazy"/>
+      <!-- STEP 2: PAYMENT -->
+      <div class="payment-screen" id="paymentScreen">
+        <p class="payment-title">Complete Your Payment</p>
+        <p class="payment-sub">Scan QR or use UPI ID below</p>
+        <div id="orderSummaryBar" class="order-summary"></div>
+        <div class="qr-wrap">
+          <img id="qrImg" src="" alt="GPay QR"/>
         </div>
-        <div class="card-body">
-          <p class="product-name">Patchwork Cargo Pants</p>
-          <p class="product-desc">Acid-wash · Multi-patch · Elastic waist</p>
-          <div class="product-footer">
-            <span class="price">₹459</span>
-            <a class="order-btn" href="https://t.me/shadowlootz" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-              Order
-            </a>
-          </div>
+        <div class="amount-tag">Pay exactly ₹459</div>
+        <div class="upi-box">
+          <p class="upi-label">UPI ID</p>
+          <p class="upi-id">shadowlootz@okhdfcbank</p>
         </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="card">
-        <div class="card-img-wrap">
-          <span class="badge">In Stock</span>
-          <img src="dress3.jpg" alt="Celestial Patchwork Hoodie" loading="lazy"/>
+        <div class="steps-list">
+          <p><span class="step-num">1</span>Open GPay / PhonePe / any UPI app</p>
+          <p><span class="step-num">2</span>Scan QR or enter UPI ID above</p>
+          <p><span class="step-num">3</span>Pay exactly ₹459</p>
+          <p><span class="step-num">4</span>Take screenshot of payment success</p>
+          <p><span class="step-num">5</span>Send screenshot to Telegram below ↓</p>
         </div>
-        <div class="card-body">
-          <p class="product-name">Celestial Patchwork Hoodie</p>
-          <p class="product-desc">Moon & star print · Fleece-lined · Deep burgundy</p>
-          <div class="product-footer">
-            <span class="price">₹459</span>
-            <a class="order-btn" href="https://t.me/shadowlootz" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-              Order
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="card">
-        <div class="card-img-wrap">
-          <span class="badge">In Stock</span>
-          <img src="dress4.jpg" alt="Aztec Hooded Poncho" loading="lazy"/>
-        </div>
-        <div class="card-body">
-          <p class="product-name">Aztec Hooded Poncho</p>
-          <p class="product-desc">Tribal weave · Fringed hem · Earthy tones</p>
-          <div class="product-footer">
-            <span class="price">₹459</span>
-            <a class="order-btn" href="https://t.me/shadowlootz" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-              Order
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="card">
-        <div class="card-img-wrap">
-          <span class="badge">In Stock</span>
-          <img src="dress5.jpg" alt="Teal Embroidered Shirt" loading="lazy"/>
-        </div>
-        <div class="card-body">
-          <p class="product-name">Teal Embroidered Shirt</p>
-          <p class="product-desc">Hand-embroidered · Linen blend · Oversized fit</p>
-          <div class="product-footer">
-            <span class="price">₹459</span>
-            <a class="order-btn" href="https://t.me/shadowlootz" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-              Order
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="card">
-        <div class="card-img-wrap">
-          <span class="badge">In Stock</span>
-          <img src="dress6.jpg" alt="Rust Tribal Kimono" loading="lazy"/>
-        </div>
-        <div class="card-body">
-          <p class="product-name">Rust Tribal Kimono</p>
-          <p class="product-desc">Block-print border · Open drape · Rust cotton</p>
-          <div class="product-footer">
-            <span class="price">₹459</span>
-            <a class="order-btn" href="https://t.me/shadowlootz" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-              Order
-            </a>
-          </div>
-        </div>
+        <a class="tg-confirm-btn" id="tgConfirmBtn" href="#" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
+          Send Payment Screenshot on Telegram
+        </a>
       </div>
 
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-brand">Shadow Loots</span>
-    <p>DM us on Telegram &nbsp;·&nbsp; <a href="https://t.me/shadowlootz" target="_blank">@shadowlootz</a></p>
-    <p style="margin-top:8px; font-size:0.75rem; opacity:0.5;">✦ handpicked bohemian finds ✦</p>
-  </footer>
+<script>
+  let currentItem = '';
 
-  <!-- FLOATING TELEGRAM BUTTON -->
-  <a class="float-cta" href="https://t.me/shadowlootz" target="_blank">
-    <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12 12 12 0 0 0 11.944 0zm5.992 8.187-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.932z"/></svg>
-    Order on Telegram
-  </a>
+  function openOrder(itemName) {
+    currentItem = itemName;
+    document.getElementById('modalItemName').textContent = itemName + ' — ₹459';
+    document.getElementById('formScreen').classList.remove('hidden');
+    document.getElementById('paymentScreen').classList.remove('active');
+    document.getElementById('custName').value = '';
+    document.getElementById('custPhone').value = '';
+    document.getElementById('custSize').value = '';
+    document.getElementById('custAddress').value = '';
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeOnOverlay(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+
+  function submitOrder() {
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const size = document.getElementById('custSize').value;
+    const address = document.getElementById('custAddress').value.trim();
+
+    if (!name) { alert('Enter your name'); return; }
+    if (!phone || phone.length < 10) { alert('Enter valid 10-digit phone number'); return; }
+    if (!size) { alert('Select a size'); return; }
+    if (!address) { alert('Enter delivery address'); return; }
+
+    document.getElementById('orderSummaryBar').innerHTML =
+      `<span>${currentItem}</span> · Size: <span>${size}</span> · <span>${name}</span> · ${phone}`;
+
+    const upiData = `upi://pay?pa=shadowlootz@okhdfcbank&pn=ShadowLoots&am=459&cu=INR&tn=${encodeURIComponent(currentItem)}`;
+    document.getElementById('qrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(upiData)}`;
+
+    const msg = `🖤 New Order — Shadow Loots\n\nItem: ${currentItem}\nSize: ${size}\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nAmount: ₹459`;
+    document.getElementById('tgConfirmBtn').href = `https://t.me/shadowlootz?text=${encodeURIComponent(msg)}`;
+
+    document.getElementById('formScreen').classList.add('hidden');
+    document.getElementById('paymentScreen').classList.add('active');
+  }
+</script>
 </body>
 </html>
